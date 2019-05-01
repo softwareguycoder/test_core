@@ -17,11 +17,14 @@
 //////////////////////////////////////////////////////////////////////////////
 // AssertIsNotNullOrWhiteSpace function
 
-void AssertIsNotNullOrWhiteSpace(const char* pszTestName,
+BOOL AssertIsNotNullOrWhiteSpace(const char* pszTestName,
     const char* pszMessage, const char* pszValue) {
     if (IsNullOrWhiteSpace(pszValue)) {
       ThrowTestFailedException(pszTestName, pszMessage);
+      return FALSE;
     }
+
+    return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////////

@@ -34,17 +34,35 @@ void DecrementTestFailureCount() {
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// GetTestFailureCount function
-
-int GetTestFailureCount() {
-  return g_nTestFailureCount;
-}
-
-//////////////////////////////////////////////////////////////////////////////
 // IncrementTestFailureCount function
 
 void IncrementTestFailureCount() {
   g_nTestFailureCount++;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// ExecuteTest function
+
+void ExecuteTest(const char* pszTestName, LPTEST_ROUTINE lpfnTest) {
+  if (IsNullOrWhiteSpace(pszTestName)) {
+    return; // Required parameter
+  }
+
+  if (lpfnTest == NULL) {
+    return; // Required parameter
+  }
+
+  if (lpfnTest) {
+    fprintf("%s PASSED\n", pszTestName);
+  } // no else branch; failed test say so when their assertions throw
+      // TestFailureExceptions
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// GetTestFailureCount function
+
+int GetTestFailureCount() {
+  return g_nTestFailureCount;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

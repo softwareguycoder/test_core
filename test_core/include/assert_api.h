@@ -12,8 +12,10 @@
  * @param pszTestName Name of the unit test routine.
  * @param pszMessage Name of the message to display if the value is blank.
  * @param pszValue Value to test.
+ * @returns TRUE if the test ran by the assert passed; FALSE if the data
+ * passed to the assert failed to meet the criteria
  */
-void AssertIsNotNullOrWhiteSpace(const char* pszTestName,
+BOOL AssertIsNotNullOrWhiteSpace(const char* pszTestName,
 		const char* pszMessage, const char* pszValue);
 
 #endif //__ASSERT_API_H__
