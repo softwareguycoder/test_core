@@ -4,6 +4,9 @@
 #include "stdafx.h"
 #include "test_core.h"
 
+#include "assert_api.h"
+#include "test_exceptions.h"
+
 ///////////////////////////////////////////////////////////////////////////////
 // Global variables
 
