@@ -15,6 +15,19 @@
 // Publicly-exposed library functions
 
 //////////////////////////////////////////////////////////////////////////////
+// AssertIsNull function
+
+BOOL AssertIsNull(const char* pszTestName,
+    const char* pszMessage, void* pvValue) {
+  if (pvValue != NULL) {
+      ThrowTestFailedException(pszTestName, pszMessage);
+      return FALSE;
+    }
+
+    return TRUE;
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // AssertIsNotNull function
 
 BOOL AssertIsNotNull(const char* pszTestName,

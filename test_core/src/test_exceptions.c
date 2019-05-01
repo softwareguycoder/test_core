@@ -27,7 +27,7 @@ void ThrowTestFailedException(const char* pszTestName,
   memset(szTrimmedMessage, 0, strlen(pszMessage));
   Trim(szTrimmedMessage, strlen(pszMessage), pszMessage);
 
-  fprintf(stderr, "%s FAILED: %s\n", pszTestName, szTrimmedMessage);
+  fprintf(stderr, "*** %s FAILED:\n\t%s\n", pszTestName, szTrimmedMessage);
 }
 
 //////////////////////////////////////////////////////////////////////////////

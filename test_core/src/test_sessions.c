@@ -50,6 +50,12 @@ LPTESTSESSION CreateTestSession(LPSETUP_ROUTINE lpfnSetUp,
   lpResult->nPassed = 0;
   lpResult->nFailed = 0;
 
+  /* If an address for one is provided, call the SetUp function specified
+   * by the caller for this session  */
+  if (lpResult->lpfnSetUp != NULL) {
+    lpResult->lpfnSetUp();
+  }
+
   return lpResult;
 }
 
