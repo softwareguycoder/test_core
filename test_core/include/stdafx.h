@@ -8,4 +8,6 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <../../common_core/common_core/include/common_core.h>
+
 #endif //__TEST_CORE_STDAFX_H__
