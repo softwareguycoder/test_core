@@ -7,6 +7,9 @@
 // To expose the Assert* functions
 #include "assert_api.h"
 
+// To expose the StartUnitTestSession and EndUnitTestSession functions
+#include "test_sessions.h"
+
 /**
  * @name LPTEST_ROUTINE
  * @brief Function signature for a unit test routine.

@@ -95,11 +95,13 @@
                                     								
                                 </option>
                                 								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.libs.1608678934" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.libs.1608678934" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
                                     									
-                                    <listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="api_core"/>
+                                    <listOptionValue builtIn="false" value="api_core"/>
                                     									
-                                    <listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="common_core"/>
+                                    <listOptionValue builtIn="false" value="uuid"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="common_core"/>
                                     								
                                 </option>
                                 								
