@@ -15,6 +15,18 @@
 // Publicly-exposed library functions
 
 //////////////////////////////////////////////////////////////////////////////
+// AssertIsFalse function
+
+BOOL AssertIsFalse(const char* pszTestName,
+    const char* pszMessage, BOOL bExpression) {
+  if (bExpression == TRUE) {
+    ThrowTestFailedException(pszTestName, pszMessage);
+    return FALSE;
+  }
+  return TRUE;
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // AssertIsNull function
 
 BOOL AssertIsNull(const char* pszTestName,
@@ -67,3 +79,13 @@ BOOL AssertIsNullOrWhiteSpace(const char* pszTestName,
 }
 
 //////////////////////////////////////////////////////////////////////////////
+// AssertIsTrue function
+
+BOOL AssertIsTrue(const char* pszTestName,
+    const char* pszMessage, BOOL bExpression) {
+  if (bExpression == FALSE) {
+    ThrowTestFailedException(pszTestName, pszMessage);
+    return FALSE;
+  }
+  return TRUE;
+}
