@@ -8,6 +8,10 @@
 //
 
 void PrintFunctionName(const char* pszFunctionName) {
+	if (IsNullOrWhiteSpace(pszFunctionName)) {
+		return;
+	}
+
 	fprintf(stdout, "%s\n", pszFunctionName);
 }
 
