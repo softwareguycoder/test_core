@@ -14,4 +14,11 @@
  */
 typedef void (*LPTEST_ROUTINE)(void);
 
+/**
+ * @name GetTestFailureCount
+ * @brief Gets the count of failed unit tests for this session.
+ * @return Count of failed unit tests.
+ */
+int GetTestFailureCount();
+
 #endif //__TEST_CORE_H__

@@ -5,20 +5,43 @@
 #include "test_core.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// Internal functions only
+// Global variables
 
 /**
- * @name PrintFunctionName
- * @brief Prints the name of a function to the console.
- * @param pszFunctionName Text containing the string to be printed.
- * @remarks This function does nothing if the pszFunctionName string is blank.
+ * @name g_nTestFailureCount
+ * @brief Global count of failed tests.
  */
-void PrintFunctionName(const char* pszFunctionName) {
-	if (IsNullOrWhiteSpace(pszFunctionName)) {
-		return;
-	}
+int g_nTestFailureCount = 0;
 
-	fprintf(stdout, "%s\n", pszFunctionName);
+///////////////////////////////////////////////////////////////////////////////
+// Internal functions only
+
+///////////////////////////////////////////////////////////////////////////////
+// ThrowTestFailedException function
+
+/**
+ * @name ThrowTestFailedException
+ * @brief Prints a message to STDERR that a unit test failed and
+ * @param pszTestName
+ * @param pszMessage
+ */
+void ThrowTestFailedException(const char* pszTestName,
+        const char* pszMessage) {
+  if (IsNullOrWhiteSpace(pszTestName)) {
+    return;
+  }
+
+  if (IsNullOrWhiteSpace(pszMessage)) {
+    return;
+  }
+
+  /* Remove whitespace and/or newlines from beginning, end of message */
+  char szTrimmedMessage[strlen(pszMessage)];
+  memset(szTrimmedMessage, 0, strlen(pszMessage));
+  Trim(szTrimmedMessage, strlen(pszMessage), pszMessage);
+
+  fprintf(stderr, "%s FAILED: %s\n", pszTestName, szTrimmedMessage);
+  g_nTestFailureCount++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
