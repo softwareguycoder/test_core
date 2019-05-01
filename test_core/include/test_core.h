@@ -15,10 +15,22 @@
 typedef void (*LPTEST_ROUTINE)(void);
 
 /**
+ * @name DecrementTestFailureCount
+ * @brief Decrements the count of failed tests.
+ */
+void DecrementTestFailureCount();
+
+/**
  * @name GetTestFailureCount
  * @brief Gets the count of failed unit tests for this session.
  * @return Count of failed unit tests.
  */
 int GetTestFailureCount();
+
+/**
+ * @name IncrementTestFailureCount
+ * @brief Increments the count of failed tests.
+ */
+void IncrementTestFailureCount();
 
 #endif //__TEST_CORE_H__

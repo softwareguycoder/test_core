@@ -48,10 +48,28 @@ void ThrowTestFailedException(const char* pszTestName,
 // Publicly-exposed functions
 
 //////////////////////////////////////////////////////////////////////////////
+// DecrementTestFailureCount function
+
+void DecrementTestFailureCount() {
+  if (GetTestFailureCount() == 0) {
+    return; // test failure count is zero or positive
+  }
+
+  g_nTestFailureCount--;
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // GetTestFailureCount function
 
 int GetTestFailureCount() {
   return g_nTestFailureCount;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// IncrementTestFailureCount function
+
+void IncrementTestFailureCount() {
+  g_nTestFailureCount++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
