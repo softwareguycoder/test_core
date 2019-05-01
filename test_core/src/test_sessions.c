@@ -25,7 +25,7 @@
  * a tear down routine for the unit test session.  May be NULL.
  */
 LPTESTSESSION CreateTestSession(LPSETUP_ROUTINE lpfnSetUp,
-        LPTEARDOWN_ROUTINE lpfnTearDown) {
+    LPTEARDOWN_ROUTINE lpfnTearDown) {
   LPTESTSESSION lpResult = (LPTESTSESSION) malloc(sizeof(TESTSESSION));
   if (lpResult == NULL) {
     fprintf(stderr, "Failed to allocate new unit test session handle.\n");
@@ -66,14 +66,16 @@ LPTESTSESSION CreateTestSession(LPSETUP_ROUTINE lpfnSetUp,
  * @param lpSession Address of a TESTSESSION structure instance that serves
  * as the test session handle.
  */
-void DestroyUnitTestSession(LPTESTSESSION lpSession) {
-  if (lpSession == NULL) {
+void DestroyUnitTestSession(LPPTESTSESSION lppSession) {
+  if (lppSession == NULL || *lppSession == NULL) {
     return; // Required parameter
   }
 
-  FreeBuffer((void**) &(lpSession->pTestSessionID));
+  FreeBuffer((void**) &((*lppSession)->pTestSessionID));
 
-  FreeBuffer((void**) &lpSession);
+  memset((*lppSession), 0, sizeof(TESTSESSION));
+
+  FreeBuffer((void**)lppSession);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -130,8 +132,8 @@ BOOL IsGUIDValid(uuid_t* pGUID) {
 // StartUnitTestSession function
 
 void StartUnitTestSession(LPSETUP_ROUTINE lpfnSetUp,
-        LPTEARDOWN_ROUTINE lpfnTearDown, LPTESTSESSION* lppTestSession) {
-  if (lppTestSession == NULL){
+    LPTEARDOWN_ROUTINE lpfnTearDown, LPPTESTSESSION lppTestSession) {
+  if (lppTestSession == NULL) {
     return; // Required parameter
   }
 
@@ -152,7 +154,7 @@ void StartUnitTestSession(LPSETUP_ROUTINE lpfnSetUp,
   GUIDToString(szSessionGUID, lpSession->pTestSessionID);
 
   fprintf(stdout, "*** STARTED UNIT TEST SESSION {%s} ***\n\n",
-          szSessionGUID);
+      szSessionGUID);
 
   *lppTestSession = lpSession;
 }
@@ -160,31 +162,31 @@ void StartUnitTestSession(LPSETUP_ROUTINE lpfnSetUp,
 //////////////////////////////////////////////////////////////////////////////
 // EndUnitTestSession function
 
-void EndUnitTestSession(LPTESTSESSION lpSession) {
-  if (lpSession == NULL) {
+void EndUnitTestSession(LPPTESTSESSION lppSession) {
+  if (lppSession == NULL || *lppSession == NULL) {
     return; // Required parameter
   }
 
-  if (!IsGUIDValid(lpSession->pTestSessionID)) {
+  if (!IsGUIDValid((*lppSession)->pTestSessionID)) {
     return; //Required value
   }
 
   char szSessionGUID[GUID_BUFFER_SIZE];
   memset(szSessionGUID, 0, GUID_BUFFER_SIZE);
 
-  GUIDToString(szSessionGUID, lpSession->pTestSessionID);
+  GUIDToString(szSessionGUID, (*lppSession)->pTestSessionID);
 
   fprintf(stdout, "\n %d test(s) passed, %d test(s) failed.\n",
-          lpSession->nPassed, lpSession->nFailed);
+      (*lppSession)->nPassed, (*lppSession)->nFailed);
 
   fprintf(stdout, "\n*** ENDING UNIT TEST SESSION {%s} ***\n",
-          szSessionGUID);
+      szSessionGUID);
 
-  if (lpSession->lpfnTearDown != NULL) {
-    lpSession->lpfnTearDown();
+  if ((*lppSession)->lpfnTearDown != NULL) {
+    (*lppSession)->lpfnTearDown();
   }
 
-  DestroyUnitTestSession(lpSession);
+  DestroyUnitTestSession(lppSession);
 }
 
 //////////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,7 @@ typedef struct _tagTESTSESSION {
   LPTEARDOWN_ROUTINE lpfnTearDown;
   int nPassed;
   int nFailed;
-} TESTSESSION, *LPTESTSESSION;
+} TESTSESSION, *LPTESTSESSION, **LPPTESTSESSION;
 
 /**
  * @name StartUnitTestSession
@@ -48,16 +48,17 @@ typedef struct _tagTESTSESSION {
  * in the session.
  */
 void StartUnitTestSession(LPSETUP_ROUTINE lpfnSetUp,
-        LPTEARDOWN_ROUTINE lpfnTearDown, LPTESTSESSION* lppTestSession);
+        LPTEARDOWN_ROUTINE lpfnTearDown, LPPTESTSESSION lppTestSession);
 
 /**
  * @name EndUnitTestSession
  * @brief Ends a unit test session. Optionally calls a tear down routine.
- * @param lpSession Handle to the test session you want to end. Required.
+ * @param lppSession Handle to the test session you want to end. Required.
  * @remarks Use of a tear down routine is needed when variables, structures,
  * and/or OS resources needed by all unit tests must be cleaned up and/or
- * released.
+ * released.  This function resets the value pointed to by lppSession to
+ * NULL.
  */
-void EndUnitTestSession(LPTESTSESSION lpSession);
+void EndUnitTestSession(LPPTESTSESSION lppSession);
 
 #endif /* __TEST_SESSIONS_H__ */
