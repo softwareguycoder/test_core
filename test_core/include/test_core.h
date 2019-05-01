@@ -10,9 +10,10 @@
 /**
  * @name LPTEST_ROUTINE
  * @brief Function signature for a unit test routine.
+ * @returns TRUE if the unit test passed; FALSE otherwise
  * @remarks Unit test routines should return nothing and take no arguments.
  */
-typedef void (*LPTEST_ROUTINE)(void);
+typedef BOOL (*LPTEST_ROUTINE)(void);
 
 /**
  * @name GetTestFailureCount
@@ -20,6 +21,5 @@ typedef void (*LPTEST_ROUTINE)(void);
  * @return Count of failed unit tests.
  */
 int GetTestFailureCount();
-
 
 #endif //__TEST_CORE_H__

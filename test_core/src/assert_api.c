@@ -19,7 +19,9 @@
 
 void AssertIsNotNullOrWhiteSpace(const char* pszTestName,
     const char* pszMessage, const char* pszValue) {
-
+    if (IsNullOrWhiteSpace(pszValue)) {
+      ThrowTestFailedException(pszTestName, pszMessage);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
