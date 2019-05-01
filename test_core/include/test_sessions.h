@@ -29,6 +29,8 @@ typedef struct _tagTESTSESSION {
   uuid_t* pTestSessionID;
   LPSETUP_ROUTINE lpfnSetUp;
   LPTEARDOWN_ROUTINE lpfnTearDown;
+  int nPassed;
+  int nFailed;
 } TESTSESSION, *LPTESTSESSION;
 
 /**

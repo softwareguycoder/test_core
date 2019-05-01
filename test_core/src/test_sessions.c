@@ -47,6 +47,9 @@ LPTESTSESSION CreateTestSession(LPSETUP_ROUTINE lpfnSetUp,
   lpResult->lpfnSetUp = lpfnSetUp;
   lpResult->lpfnTearDown = lpfnTearDown;
 
+  lpResult->nPassed = 0;
+  lpResult->nFailed = 0;
+
   return lpResult;
 }
 
@@ -164,6 +167,9 @@ void EndUnitTestSession(LPTESTSESSION lpSession) {
   memset(szSessionGUID, 0, GUID_BUFFER_SIZE);
 
   GUIDToString(szSessionGUID, lpSession->pTestSessionID);
+
+  fprintf(stdout, "\n %d test(s) passed, %d test(s) failed.\n",
+          lpSession->nPassed, lpSession->nFailed);
 
   fprintf(stdout, "\n*** ENDING UNIT TEST SESSION {%s} ***\n",
           szSessionGUID);

@@ -21,17 +21,13 @@ typedef BOOL (*LPTEST_ROUTINE)(void);
 /**
  * @name ExecuteTest
  * @brief Executes the unit test specified.
+ * @param lpSession Reference to the specific test session that this test
+ * is running as a part of. Required.
  * @param pszTestName String containing a name/description of the unit test.
  * @param lpfnTest Address of a function having a signature matching that
  * of LPTEST_ROUTINE that is called to execute the unit test.
  */
-void ExecuteTest(const char* pszTestName, LPTEST_ROUTINE lpfnTest);
-
-/**
- * @name GetTestFailureCount
- * @brief Gets the count of failed unit tests for this session.
- * @return Count of failed unit tests.
- */
-int GetTestFailureCount();
+void ExecuteTest(LPTESTSESSION lpSession,
+        const char* pszTestName, LPTEST_ROUTINE lpfnTest);
 
 #endif //__TEST_CORE_H__

@@ -6,18 +6,6 @@
 #define __TEST_EXCEPTIONS_H__
 
 /**
- * @name DecrementTestFailureCount
- * @brief Decrements the count of failed tests.
- */
-void DecrementTestFailureCount();
-
-/**
- * @name IncrementTestFailureCount
- * @brief Increments the count of failed tests.
- */
-void IncrementTestFailureCount();
-
-/**
  * @name ThrowTestFailedException
  * @brief Prints a message to STDERR that a unit test failed and
  * @param pszTestName Name of the unit test routine.

@@ -28,7 +28,6 @@ void ThrowTestFailedException(const char* pszTestName,
   Trim(szTrimmedMessage, strlen(pszMessage), pszMessage);
 
   fprintf(stderr, "%s FAILED: %s\n", pszTestName, szTrimmedMessage);
-  IncrementTestFailureCount();
 }
 
 //////////////////////////////////////////////////////////////////////////////
