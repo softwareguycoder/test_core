@@ -14,6 +14,6 @@
  */
 typedef void (*LPTEST_ROUTINE)(void);
 
-void PrintFunctionName(LPTEST_ROUTINE lpfnTestRoutine);
+void PrintFunctionName(const char* pszFunctionName);
 
 #endif //__TEST_CORE_H__
