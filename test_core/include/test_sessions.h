@@ -20,25 +20,40 @@ typedef void (*LPSETUP_ROUTINE)(void);
 typedef void (*LPTEARDOWN_ROUTINE)(void);
 
 /**
+ * @name TESTSESSION
+ * @brief Data structure to keep a handle on the current unit test session.
+ */
+typedef struct _tagTESTSESSION {
+  uuid_t* pTestSessionID;
+  LPSETUP_ROUTINE lpfnSetUp;
+  LPTEARDOWN_ROUTINE lpfnTearDown;
+} TESTSESSION, *LPTESTSESSION;
+
+/**
  * @name StartUnitTestSession
  * @brief Starts a unit test session.  Optionally calls a set up routine.
  * @param lpfnSetUp (Optional.) Address of a function callback to be invoked
  * when the unit test session has been started. May be NULL.
+ * @param lpfnTearDown (Optional.) Address of a function callback to be
+ * invoked when the unit test session has been ended.  May be NULL.
+ * @param lppTestSession Receives the address of a newly-allocated TESTSESSION
+ * structure instance that serves as a handle to the session. This handle must
+ * be provided to the EndUnitTestSession function.
  * @remarks A set up routine is utilized to allocate variables, structures,
  * or acquire resources from the OS that must be available to all unit tests
  * in the session.
  */
-void StartUnitTestSession(LPSETUP_ROUTINE lpfnSetUp);
+void StartUnitTestSession(LPSETUP_ROUTINE lpfnSetUp,
+        LPTEARDOWN_ROUTINE lpfnTearDown, LPTESTSESSION* lppTestSession);
 
 /**
  * @name EndUnitTestSession
  * @brief Ends a unit test session. Optionally calls a tear down routine.
- * @param lpfnTearDown (Optional.) Address of a function callback to be
- * invoked when the unit test session has been ended.  May be NULL.
+ * @param lpSession Handle to the test session you want to end. Required.
  * @remarks Use of a tear down routine is needed when variables, structures,
  * and/or OS resources needed by all unit tests must be cleaned up and/or
  * released.
  */
-void EndUnitTestSession(LPTEARDOWN_ROUTINE lpfnTearDown);
+void EndUnitTestSession(LPTESTSESSION lpSession);
 
 #endif /* __TEST_SESSIONS_H__ */
