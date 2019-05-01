@@ -3,6 +3,8 @@
 #ifndef __TEST_SESSIONS_H__
 #define __TEST_SESSIONS_H__
 
+#include <uuid/uuid.h>
+
 /**
  * @brief Callback signature for a routine that is called when a unit test
  * session is started.

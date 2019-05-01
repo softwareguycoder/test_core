@@ -53,7 +53,7 @@ void ExecuteTest(const char* pszTestName, LPTEST_ROUTINE lpfnTest) {
   }
 
   if (lpfnTest) {
-    fprintf("%s PASSED\n", pszTestName);
+    fprintf(stdout, "%s PASSED\n", pszTestName);
   } // no else branch; failed test say so when their assertions throw
       // TestFailureExceptions
 }
