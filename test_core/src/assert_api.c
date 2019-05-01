@@ -20,18 +20,18 @@
 BOOL AssertIsNull(const char* pszTestName,
     const char* pszMessage, void* pvValue) {
   if (pvValue != NULL) {
-      ThrowTestFailedException(pszTestName, pszMessage);
-      return FALSE;
-    }
+    ThrowTestFailedException(pszTestName, pszMessage);
+    return FALSE;
+  }
 
-    return TRUE;
+  return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // AssertIsNotNull function
 
 BOOL AssertIsNotNull(const char* pszTestName,
-        const char* pszMessage, void* pvValue) {
+    const char* pszMessage, void* pvValue) {
   if (pvValue == NULL) {
     ThrowTestFailedException(pszTestName, pszMessage);
     return FALSE;
@@ -44,8 +44,21 @@ BOOL AssertIsNotNull(const char* pszTestName,
 // AssertIsNotNullOrWhiteSpace function
 
 BOOL AssertIsNotNullOrWhiteSpace(const char* pszTestName,
-        const char* pszMessage, const char* pszValue) {
+    const char* pszMessage, const char* pszValue) {
   if (IsNullOrWhiteSpace(pszValue)) {
+    ThrowTestFailedException(pszTestName, pszMessage);
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// AssertIsNullOrWhiteSpace function
+
+BOOL AssertIsNullOrWhiteSpace(const char* pszTestName,
+    const char* pszMessage, const char* pszValue) {
+  if (!IsNullOrWhiteSpace(pszValue)) {
     ThrowTestFailedException(pszTestName, pszMessage);
     return FALSE;
   }

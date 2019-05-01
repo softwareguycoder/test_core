@@ -23,9 +23,10 @@ void ThrowTestFailedException(const char* pszTestName,
   }
 
   /* Remove whitespace and/or newlines from beginning, end of message */
-  char szTrimmedMessage[strlen(pszMessage)];
-  memset(szTrimmedMessage, 0, strlen(pszMessage));
-  Trim(szTrimmedMessage, strlen(pszMessage), pszMessage);
+  const int MESSAGE_SIZE = strlen(pszMessage) + 1;
+  char szTrimmedMessage[MESSAGE_SIZE];
+  memset(szTrimmedMessage, 0, MESSAGE_SIZE);
+  Trim(szTrimmedMessage, MESSAGE_SIZE, pszMessage);
 
   fprintf(stderr, "*** %s FAILED:\n\t%s\n", pszTestName, szTrimmedMessage);
 }

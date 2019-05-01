@@ -44,4 +44,17 @@ BOOL AssertIsNotNull(const char* pszTestName,
 BOOL AssertIsNotNullOrWhiteSpace(const char* pszTestName,
 		const char* pszMessage, const char* pszValue);
 
+/**
+ * @name AssertIsNullOrWhiteSpace
+ * @brief Tests whether the pszValue string is blank, and displays a message
+ * and fails the unit test if it is not.
+ * @param pszTestName Name of the unit test routine.
+ * @param pszMessage Name of the message to display if the value is not blank.
+ * @param pszValue Value to test.
+ * @returns TRUE if the test ran by the assert passed; FALSE if the data
+ * passed to the assert failed to meet the criteria
+ */
+BOOL AssertIsNullOrWhiteSpace(const char* pszTestName,
+    const char* pszMessage, const char* pszValue);
+
 #endif //__ASSERT_API_H__
