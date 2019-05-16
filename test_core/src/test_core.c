@@ -27,6 +27,8 @@ void ExecuteTest(LPTESTSESSION lpSession,
     return; // Required parameter
   }
 
+  fprintf(stdout, "Running test '%s'...\n", pszTestName);
+
   if (lpfnTest()) {
     fprintf(stdout, "%s PASSED\n", pszTestName);
     lpSession->nPassed++;
