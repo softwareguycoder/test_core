@@ -12,6 +12,46 @@
 // Internally-used functions
 
 //////////////////////////////////////////////////////////////////////////////
+// GetNewTestSessionGUID function
+
+/**
+ * @name GetNewTestSessionGUID
+ * @brief Generates a new UUID to be associated with a unit test session.
+ * @param pNewUUID Address of a uuid_t variable that will receive the newly-
+ * generated universally-unique identifier (UUID) value.
+ */
+void GetNewTestSessionGUID(uuid_t* pNewUUID) {
+  if (pNewUUID == NULL) {
+    return;
+  }
+
+  uuid_generate_random(*pNewUUID);
+}
+
+/**
+ * @name GUIDToString
+ * @brief Transforms a uuid_t value to a string representation of the GUID.
+ * @param pszBuffer Buffer that will be filled with the string. Must be 37
+ * bytes in size.
+ * @param pGUID The UUID value to represent as a string.
+ *
+ */
+void GUIDToString(char* pszBuffer, uuid_t* pGUID) {
+  if (pszBuffer == NULL) {
+    return; // Required parameter
+  }
+  if (pGUID == NULL) {
+    return; // Required parameter
+  }
+
+  if (uuid_is_null(*pGUID)) {
+    return; // uuid_t must contain a valid UUID
+  }
+
+  uuid_unparse(*pGUID, pszBuffer);
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // CreateTestSession function
 
 /**
@@ -76,46 +116,6 @@ void DestroyUnitTestSession(LPPTESTSESSION lppSession) {
   memset((*lppSession), 0, sizeof(TESTSESSION));
 
   FreeBuffer((void**)lppSession);
-}
-
-//////////////////////////////////////////////////////////////////////////////
-// GetNewTestSessionGUID function
-
-/**
- * @name GetNewTestSessionGUID
- * @brief Generates a new UUID to be associated with a unit test session.
- * @param pNewUUID Address of a uuid_t variable that will receive the newly-
- * generated universally-unique identifier (UUID) value.
- */
-void GetNewTestSessionGUID(uuid_t* pNewUUID) {
-  if (pNewUUID == NULL) {
-    return;
-  }
-
-  uuid_generate_random(*pNewUUID);
-}
-
-/**
- * @name GUIDToString
- * @brief Transforms a uuid_t value to a string representation of the GUID.
- * @param pszBuffer Buffer that will be filled with the string. Must be 37
- * bytes in size.
- * @param pGUID The UUID value to represent as a string.
- *
- */
-void GUIDToString(char* pszBuffer, uuid_t* pGUID) {
-  if (pszBuffer == NULL) {
-    return; // Required parameter
-  }
-  if (pGUID == NULL) {
-    return; // Required parameter
-  }
-
-  if (uuid_is_null(*pGUID)) {
-    return; // uuid_t must contain a valid UUID
-  }
-
-  uuid_unparse(*pGUID, pszBuffer);
 }
 
 //////////////////////////////////////////////////////////////////////////////
